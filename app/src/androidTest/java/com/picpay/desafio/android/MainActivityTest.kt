@@ -12,6 +12,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import org.junit.Test
+import ui.OldMainActivity
 
 
 class MainActivityTest {
@@ -22,7 +23,7 @@ class MainActivityTest {
 
     @Test
     fun shouldDisplayTitle() {
-        launchActivity<MainActivity>().apply {
+        launchActivity<OldMainActivity>().apply {
             val expectedTitle = context.getString(R.string.title)
 
             moveToState(Lifecycle.State.RESUMED)
@@ -44,7 +45,7 @@ class MainActivityTest {
 
         server.start(serverPort)
 
-        launchActivity<MainActivity>().apply {
+        launchActivity<OldMainActivity>().apply {
             // TODO("validate if list displays items returned by server")
         }
 
