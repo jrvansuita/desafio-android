@@ -6,7 +6,7 @@ To-do List
 - [x] MVVM - Lifecycle awareness
 - [x] Clean arch
 - [x] Dagger
-- [] Api cache
+- [x] Api cache
 - [] Unit Tests
 - [] Instrumental Tests
 

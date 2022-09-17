@@ -10,7 +10,6 @@ import com.picpay.desafio.android.R
 import com.picpay.desafio.android.TheApplication
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.di.ViewModelFactory
-import com.picpay.desafio.android.ext.appComponent
 import com.picpay.desafio.android.ui.adapter.UserListAdapter
 import com.picpay.desafio.android.viewmodel.MainViewModel
 import javax.inject.Inject
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: MainViewModel by viewModels {
-        application.appComponent().viewModelsFactory()
+        (applicationContext as TheApplication).appComponent.viewModelsFactory()
     }
 
     private lateinit var adapter: UserListAdapter
@@ -33,8 +32,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        (applicationContext as TheApplication).appComponent.inject(viewModel)
 
         setUpRecyclerView()
         loadUsers()

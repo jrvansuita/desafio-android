@@ -1,8 +1,8 @@
 package com.picpay.desafio.android.di
 
-import com.picpay.data.api.UserService
 import com.picpay.data.di.ServiceModule
 import com.picpay.data.repository.UserRepositoryImpl
+import com.picpay.data.service.UserService
 import com.picpay.domain.repositories.UserRepository
 import com.picpay.domain.usecases.FindAllUsersUseCase
 import dagger.Module

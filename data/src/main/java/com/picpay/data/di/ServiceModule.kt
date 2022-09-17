@@ -1,6 +1,6 @@
 package com.picpay.data.di
 
-import com.picpay.data.api.UserService
+import com.picpay.data.service.UserService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
