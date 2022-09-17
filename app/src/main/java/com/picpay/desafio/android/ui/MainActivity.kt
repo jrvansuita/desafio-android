@@ -1,15 +1,17 @@
-package ui
+package com.picpay.desafio.android.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.TheApplication
-import com.picpay.desafio.android.UserListAdapter
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.di.ViewModelFactory
+import com.picpay.desafio.android.ext.appComponent
+import com.picpay.desafio.android.ui.adapter.UserListAdapter
 import com.picpay.desafio.android.viewmodel.MainViewModel
 import javax.inject.Inject
 
@@ -21,10 +23,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: MainViewModel by viewModels {
-        (applicationContext as TheApplication).appComponent.viewModelsFactory()
+        application.appComponent().viewModelsFactory()
     }
 
-    //private val viewModel: MainViewModel by viewModels()
     private lateinit var adapter: UserListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,9 +54,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         viewModel.getUsers()
 
-        viewModel.users.observe(this) {
-            toggleRecyclerVisualization(it.isNotEmpty())
-            adapter.users = it
+        viewModel.state.observe(this) {
+            toggleRecyclerVisualization(true)
+
+            when (it) {
+                is MainViewModel.State.Success -> {
+                    adapter.users = it.users
+                }
+                is MainViewModel.State.Error -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

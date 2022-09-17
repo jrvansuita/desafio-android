@@ -14,8 +14,13 @@ class MainViewModel @Inject constructor(
     private val findAllUsersUseCase: FindAllUsersUseCase
 ) : ViewModel() {
 
-    private val userLiveData = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>> = userLiveData
+    sealed class State {
+        class Success(val users: List<User>) : State()
+        class Error(val message: String?) : State()
+    }
+
+    private val mutableState = MutableLiveData<State>()
+    val state: LiveData<State> = mutableState
     private val compositeDisposable = CompositeDisposable()
 
     fun getUsers() {
@@ -24,10 +29,10 @@ class MainViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 it?.let {
-                    userLiveData.postValue(it)
+                    mutableState.postValue(State.Success(it))
                 }
             }, {
-//Tratar o erro
+                mutableState.postValue(State.Error(it.message))
             }).let {
                 compositeDisposable.add(it)
             }

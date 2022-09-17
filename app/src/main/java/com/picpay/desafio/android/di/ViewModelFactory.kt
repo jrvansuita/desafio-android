@@ -9,7 +9,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 @Singleton
-class ViewModelFactory @Inject constructor(private val mainViewModelProvider: Provider<MainViewModel>) :
+class ViewModelFactory @Inject constructor(mainViewModelProvider: Provider<MainViewModel>) :
     ViewModelProvider.Factory {
 
     private val providers = mapOf<Class<*>, Provider<out ViewModel>>(

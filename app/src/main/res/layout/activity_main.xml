@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="ui.OldMainActivity">
+    tools:context="com.picpay.desafio.android.ui.OldMainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

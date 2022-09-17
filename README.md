@@ -5,6 +5,7 @@ To-do List
 - [x] Screen configuration problem
 - [x] MVVM - Lifecycle awareness
 - [x] Clean arch
+- [x] Dagger
 - [] Api cache
 - [] Unit Tests
 - [] Instrumental Tests
