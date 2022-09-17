@@ -7,7 +7,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
-import com.picpay.desafio.android.ui.OldMainActivity
+import com.picpay.desafio.android.ui.MainActivity
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -23,7 +23,7 @@ class MainActivityTest {
 
     @Test
     fun shouldDisplayTitle() {
-        launchActivity<OldMainActivity>().apply {
+        launchActivity<MainActivity>().apply {
             val expectedTitle = context.getString(R.string.title)
 
             moveToState(Lifecycle.State.RESUMED)
@@ -37,7 +37,7 @@ class MainActivityTest {
         server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return when (request.path) {
-                    "/users" -> successResponse
+                    "users" -> successResponse
                     else -> errorResponse
                 }
             }
@@ -45,8 +45,13 @@ class MainActivityTest {
 
         server.start(serverPort)
 
-        launchActivity<OldMainActivity>().apply {
-            // TODO("validate if list displays items returned by server")
+        launchActivity<MainActivity>().apply {
+            RecyclerViewMatchers.checkRecyclerViewItem(
+                R.id.recyclerView,
+                0,
+                withText("Eduardo Santos")
+            )
+
         }
 
         server.close()
