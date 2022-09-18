@@ -2,14 +2,22 @@
 
 To-do List
 
-- [x] Screen configuration problem
-- [x] MVVM - Lifecycle awareness
-- [x] Clean arch
-- [x] Dagger
-- [x] Api cache
-- [] Unit Tests
-- [] Instrumental Tests
 
+- [x] Em mudanças de configuração o aplicativo perde o estado da tela. Gostaríamos que o mesmo fosse mantido.
+  > Fixed with MVVM, that keeps data live with lifecycle awareness.
+- [x] Nossos relatórios de crash têm mostrado alguns crashes relacionados a campos que não deveriam ser nulos sendo nulos e gerenciamento de lifecycle. Gostaríamos que fossem corrigidos.
+  > Fixed with MVVM & Dagger DI, that make much better lifecycle management.
+- [x] Gostaríamos de cachear os dados retornados pelo servidor.
+  > Fixed with a `CacheModule` that provides caching interceptor for Retrofit network calls.
+- [x] Haverá mudanças na lógica de negócios e gostaríamos que a arquitetura reaja bem a isso.
+  > Fixed with clean arch. The domain module will keep entities and use cases for bussiness logic.
+- [x] Haverá mudanças na lógica de apresentação. Gostaríamos que a arquitetura reaja bem a isso.
+  > Fixed with clean arch. The app module will keep all presentation logic and the data module will provide all repositories needed (Network, Local, etc)
+- [x] Gostaríamos de ter testes unitários testando nossa lógica de apresentação, negócios e dados independentemente, visto que tanto a escrita quanto execução dos mesmos são rápidas.
+  > Created some unit tests for use case and service on data module.
+- [x] Por outro lado, testes unitários rodam em um ambiente de execução diferenciado e são menos fiéis ao dia-a-dia de nossos usuários, então testes instrumentados também são importantes.
+  > Created a single instrumental test file for `MainActivity` on app module. This test will check presentation integrity with supplied api response.
+  
 ------------------------
 
 <img src="https://github.com/mobilepicpay/desafio-android/blob/master/desafio-picpay.gif" width="300"/>
