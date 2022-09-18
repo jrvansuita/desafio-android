@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkModule {
 
     companion object {
-        private const val URL = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
+        var URL = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
     }
 
     @Provides
